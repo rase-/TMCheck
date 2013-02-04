@@ -1,8 +1,9 @@
 #include <check.h>
+#include <stdlib.h>
 
-START_TEST(this_is_a_test_case, "2.5")
+START_TEST_WITH_POINTS(this_is_a_test_case, "2.5")
 {
-	fail_unless(true);
+	fail_unless(1);
 }
 END_TEST
 
