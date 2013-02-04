@@ -199,7 +199,8 @@ void CK_EXPORT tcase_add_checked_fixture (TCase *tc, SFun setup, SFun teardown);
 void CK_EXPORT tcase_set_timeout (TCase *tc, int timeout);
  
 /* Internal function to mark the start of a test function */
-void CK_EXPORT tcase_fn_start (const char *fname, char *points, const char *file, int line);
+void CK_EXPORT tcase_fn_start (const char *fname, const char *file, int line);
+void CK_EXPORT tcase_fn_start_with_points (const char *fname, char *points, const char *file, int line);
 
 /* Start a unit test with START_TEST(unit_name), end with END_TEST
    One must use braces within a START_/END_ pair to declare new variables
