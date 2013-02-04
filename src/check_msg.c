@@ -150,7 +150,6 @@ static TestResult *construct_test_result (RcvMsg *rmsg, int waserror)
 
   if (rmsg == NULL)
     return NULL;
-
   tr = tr_create();
 
   if (rmsg->msg != NULL || waserror) {
@@ -167,7 +166,7 @@ static TestResult *construct_test_result (RcvMsg *rmsg, int waserror)
     tr->msg = NULL;
     tr_set_loc_by_ctx (tr, CK_CTX_TEST, rmsg);
   }
-  tr->points = rmsg->points;
+  strcpy (tr->points, rmsg->points);
   return tr;
 }
 

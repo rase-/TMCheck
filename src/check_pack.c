@@ -360,7 +360,7 @@ static int get_result (char *buf, RcvMsg *rmsg)
       PointsMsg *pmsg = (PointsMsg *) &msg;
       rmsg->points = emalloc (strlen (pmsg->points));
       strcpy (rmsg->points, pmsg->points);
-    } else
+  } else
     check_type (type, __FILE__, __LINE__);
 
   return n;
@@ -450,6 +450,5 @@ RcvMsg *punpack (int fdes)
     free (rmsg);
     rmsg = NULL;
   }
-
   return rmsg;
 }
