@@ -26,8 +26,8 @@ enum ck_msg_type {
   CK_MSG_CTX,
   CK_MSG_FAIL,
   CK_MSG_LOC,
-  CK_MSG_LAST,
-  CK_MSG_POINTS
+  CK_MSG_POINTS,
+  CK_MSG_LAST
 };
 
 typedef struct CtxMsg
