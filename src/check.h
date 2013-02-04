@@ -204,10 +204,18 @@ void CK_EXPORT tcase_fn_start (const char *fname, char *points, const char *file
 /* Start a unit test with START_TEST(unit_name), end with END_TEST
    One must use braces within a START_/END_ pair to declare new variables
 */ 
-#define START_TEST(__testname, points)\
+#define START_TEST(__testname)\
 static void __testname (int _i CK_ATTRIBUTE_UNUSED)\
 {\
-  tcase_fn_start (""# __testname, points, __FILE__, __LINE__);
+  tcase_fn_start (""# __testname, __FILE__, __LINE__);
+
+/* End a unit test */
+#define END_TEST }
+
+#define START_TEST_WITH_POINTS(__testname, points)\
+static void __testname (int _i CK_ATTRIBUTE_UNUSED)\
+{\
+  tcase_fn_start_with_points (""# __testname, points, __FILE__, __LINE__);
 
 /* End a unit test */
 #define END_TEST }
