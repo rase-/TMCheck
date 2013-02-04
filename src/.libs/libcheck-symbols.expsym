@@ -9,6 +9,7 @@ _tcase_add_unchecked_fixture
 _tcase_add_checked_fixture
 _tcase_set_timeout
 _tcase_fn_start
+_tcase_fn_start_with_points
 __fail_unless
 __mark_point
 _tr_rtype
