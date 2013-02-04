@@ -143,6 +143,9 @@ void tr_xmlprint (FILE *file, TestResult *tr, enum print_output print_mode CK_AT
   fprintf(file, "      <iteration>%d</iteration>\n", tr->iter);
   fprintf(file, "      <description>%s</description>\n", tr->tcname);
   fprintf(file, "      <message>%s</message>\n", tr->msg);
+  if (tr->points != NULL) {
+    fprintf(file, "      <points>%s</points>\n", tr->points);  
+  }
   fprintf(file, "    </test>\n");
   
   if (slash != NULL) {
