@@ -351,6 +351,12 @@ static int get_result (char *buf, RcvMsg *rmsg)
       strcpy (rmsg->msg, fmsg->msg);
       rmsg->failctx = rmsg->lastctx;
     }
+    else if (type == CK_MSG_POINTS)
+    {
+      PointsMsg *pmsg = (PointsMsg *) &msg;
+      rmsg->points = emalloc (strlen (pmsg->points));
+      strcpy (rmsg->points, pmsg->points);
+    }
     else
     {
       /* Skip subsequent failure messages, only happens for CK_NOFORK */
