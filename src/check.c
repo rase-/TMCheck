@@ -363,6 +363,7 @@ static void tr_init (TestResult *tr)
   tr->file = NULL;
   tr->tcname = NULL;
   tr->tname = NULL;
+  tr->points = NULL;
 }
 
 

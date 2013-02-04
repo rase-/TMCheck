@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <testsuites xmlns="http://check.sourceforge.net/ns">
-  <datetime>2013-02-04 15:52:00</datetime>
+  <datetime>2013-02-04 15:54:18</datetime>
   <suite>
     <title>Test</title>
