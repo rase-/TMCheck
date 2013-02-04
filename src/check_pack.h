@@ -26,7 +26,8 @@ enum ck_msg_type {
   CK_MSG_CTX,
   CK_MSG_FAIL,
   CK_MSG_LOC,
-  CK_MSG_LAST
+  CK_MSG_LAST,
+  CK_MSG_POINTS
 };
 
 typedef struct CtxMsg
@@ -45,6 +46,11 @@ typedef struct FailMsg
   char *msg;
 } FailMsg;
 
+typedef struct PointsMsg
+{
+  char *points;
+} PointsMsg;
+
 typedef union
 {
   CtxMsg  ctx_msg;
@@ -61,6 +67,7 @@ typedef struct RcvMsg
   char *test_file;
   int test_line;
   char *msg;
+  char *points;
 } RcvMsg;
 
 void rcvmsg_free (RcvMsg *rmsg);

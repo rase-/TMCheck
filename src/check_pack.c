@@ -53,9 +53,11 @@ static char *upack_str  (char **buf);
 static int   pack_ctx   (char **buf, CtxMsg  *cmsg);
 static int   pack_loc   (char **buf, LocMsg  *lmsg);
 static int   pack_fail  (char **buf, FailMsg *fmsg);
+static int   pack_points  (char **buf, PointsMsg *fmsg);
 static void  upack_ctx  (char **buf, CtxMsg  *cmsg);
 static void  upack_loc  (char **buf, LocMsg  *lmsg);
 static void  upack_fail (char **buf, FailMsg *fmsg);
+static void  upack_points (char **buf, PointsMsg *fmsg);
 
 static void  check_type (int type, const char *file, int line);
 static enum ck_msg_type upack_type (char **buf);
@@ -74,13 +76,15 @@ typedef void (*upfun) (char **, CheckMsg *);
 static pfun pftab [] = {
   (pfun) pack_ctx,
   (pfun) pack_fail,
-  (pfun) pack_loc
+  (pfun) pack_loc,
+  (pfun) pack_points
 };
 
 static upfun upftab [] = {
   (upfun) upack_ctx,
   (upfun) upack_fail,
-  (upfun) upack_loc
+  (upfun) upack_loc,
+  (upfun) upack_points
 };
 
 int pack (enum ck_msg_type type, char **buf, CheckMsg *msg)
@@ -247,6 +251,25 @@ static void upack_fail (char **buf, FailMsg *fmsg)
   fmsg->msg = upack_str (buf);
 }
 
+static int pack_points (char **buf, PointsMsg *pmsg)
+{
+  char *ptr;
+  int len;
+
+  len = 4 + 4 + (pmsg->points ? strlen (pmsg->points) : 0);
+  *buf = ptr = emalloc (len);
+
+  pack_type (&ptr, CK_MSG_POINTS);
+  pack_str (&ptr, pmsg->points);
+
+  return len;
+}
+
+static void upack_points (char **buf, PointsMsg *pmsg)
+{
+  pmsg->points = upack_str (buf);
+}
+
 static void check_type (int type, const char *file, int line)
 {
   if (type < 0 || type >= CK_MSG_LAST)
@@ -359,6 +382,7 @@ static RcvMsg *rcvmsg_create (void)
   rmsg->lastctx = CK_CTX_INVALID;
   rmsg->failctx = CK_CTX_INVALID;
   rmsg->msg = NULL;
+  rmsg->points = NULL;
   reset_rcv_test (rmsg);
   reset_rcv_fixture (rmsg);
   return rmsg;
@@ -369,6 +393,7 @@ void rcvmsg_free (RcvMsg *rmsg)
   free(rmsg->fixture_file);
   free(rmsg->test_file);
   free(rmsg->msg);
+  free(rmsg->points);
   free(rmsg);
 }
 

@@ -72,6 +72,7 @@ struct TestResult {
   const char *tcname;  /* Test case that generated the result */
   const char *tname;  /* Test that generated the result */
   char *msg;     /* Failure message */
+  char *points;
 };
 
 TestResult *tr_create(void);
