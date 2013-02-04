@@ -200,7 +200,13 @@ void tcase_set_timeout (TCase *tc, int timeout)
   }
 }
 
-void tcase_fn_start (const char *fname CK_ATTRIBUTE_UNUSED, char *points, const char *file, int line)
+void tcase_fn_start (const char *fname CK_ATTRIBUTE_UNUSED, const char *file, int line)
+{
+  send_ctx_info (CK_CTX_TEST);
+  send_loc_info (file, line);
+}
+
+void tcase_fn_start_with_points (const char *fname CK_ATTRIBUTE_UNUSED, char *points, const char *file, int line)
 {
   send_ctx_info (CK_CTX_TEST);
   send_loc_info (file, line);
