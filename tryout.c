@@ -21,6 +21,7 @@ int main()
 {
 	Suite *suite = test_suite();
 	SRunner *sr = srunner_create(suite);
+	srunner_set_xml(sr, "xml_log.txt");
 	srunner_run_all(sr, CK_NORMAL);
 	int tests_failed = srunner_ntests_failed(sr);
 	srunner_free(sr);
