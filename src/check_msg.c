@@ -147,7 +147,6 @@ static void tr_set_loc_by_ctx (TestResult *tr, enum ck_result_ctx ctx,
 static TestResult *construct_test_result (RcvMsg *rmsg, int waserror)
 {
   TestResult *tr;
-
   if (rmsg == NULL)
     return NULL;
   tr = tr_create();
@@ -166,7 +165,11 @@ static TestResult *construct_test_result (RcvMsg *rmsg, int waserror)
     tr->msg = NULL;
     tr_set_loc_by_ctx (tr, CK_CTX_TEST, rmsg);
   }
-  strcpy (tr->points, rmsg->points);
+  if (!waserror && rmsg->points != NULL) {
+    tr->points = malloc(sizeof(rmsg->points));
+    strcpy (tr->points, rmsg->points);
+  }
+
   return tr;
 }
 
